@@ -68,7 +68,7 @@ class CatarseWepay::WepayController < ApplicationController
       redirect_to response['checkout_uri']
     else
       flash[:failure] = t('wepay_error', scope: SCOPE)
-      return redirect_to main_app.edit_project_contribution_path(project_id: contribution.project.id, id: contribution.id)
+      return redirect_to main_app.edit_project_backer_path(project_id: contribution.project.id, id: contribution.id)
     end
   end
 
@@ -82,10 +82,10 @@ class CatarseWepay::WepayController < ApplicationController
     })
     if response['state'] == 'authorized'
       flash[:success] = t('success', scope: SCOPE)
-      redirect_to main_app.project_contribution_path(project_id: contribution.project.id, id: contribution.id)
+      redirect_to main_app.project_backer_path(project_id: contribution.project.id, id: contribution.id)
     else
       flash[:failure] = t('wepay_error', scope: SCOPE)
-      redirect_to main_app.new_project_contribution_path(contribution.project)
+      redirect_to main_app.new_project_backer_path(contribution.project)
     end
   end
 
